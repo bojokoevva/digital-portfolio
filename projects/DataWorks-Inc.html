@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DataWorks Inc. – Employee & Project Analytics | Ayana Bojokoeva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Relational database and analytics project for DataWorks Inc., a consulting firm that manages employees, departments, and client projects."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-main: #f3f4f6;
+      --bg-surface: #ffffff;
+      --accent: #047857;
+      --accent-dark: #064e3b;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --radius-xl: 1.5rem;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .back-link a {
+      color: var(--accent-dark);
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+    .title-block p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .tag-row {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(4, 120, 87, 0.5);
+      background: #ecfdf5;
+      color: var(--accent-dark);
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.3rem 1.4rem 1.4rem;
+      margin-bottom: 1.3rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      font-size: 0.88rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    p { margin-bottom: 0.4rem; }
+
+    ul {
+      padding-left: 1.1rem;
+      margin-top: 0.3rem;
+    }
+    li { margin-bottom: 0.2rem; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .meta-item span {
+      display: block;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .screenshot-box {
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(4, 120, 87, 0.7);
+      background: #f9fafb;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+    .screenshot-box img {
+      border-radius: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .mini-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 780px) {
+      .shell { padding-inline: 1rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+        <p class="back-link">
+          ← <a href="../index.html">Back to portfolio</a>
+        </p>
+        <h1>DataWorks Inc. – Employee &amp; Project Analytics</h1>
+        <p>
+          A mini consulting-style database for a data firm that tracks employees,
+          departments, client projects, and hours worked.
+        </p>
+        <div class="tag-row">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL Queries</span>
+          <span class="tag">ERD &amp; Joins</span>
+          <span class="tag">Analytics</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; text-align:right; color:var(--text-muted);">
+          ISM 4212 – Database Design &amp; Administration<br />
+          University of South Florida · Prof. Nasir Uddin
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Context & goal -->
+      <section class="card">
+        <h2>Context &amp; goal</h2>
+        <div class="two-col">
+          <div>
+            <p>
+              DataWorks Inc. is a fictional data consulting firm that manages
+              staff, departments, and client projects. My role in this project
+              was to design and implement a relational database so the company
+              could answer real questions such as:
+            </p>
+            <ul>
+              <li>Which employees work on which projects, and for how many hours?</li>
+              <li>Which projects have the largest budgets and workloads?</li>
+              <li>Who is leading each initiative across departments?</li>
+            </ul>
+            <p>
+              The business requirements included a true
+              <strong>many-to-many relationship</strong> between employees and
+              projects, support for leadership roles, and the ability to audit
+              budget and hours over time.
+            </p>
+          </div>
+          <div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span>Role</span>
+                Data modeler, SQL developer
+              </div>
+              <div class="meta-item">
+                <span>Setting</span>
+                Individual course mini-project
+              </div>
+              <div class="meta-item">
+                <span>Focus</span>
+                Schema design, joins, analytics queries
+              </div>
+              <div class="meta-item">
+                <span>Tools &amp; tech</span>
+                PostgreSQL · DBeaver · SQL
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schema & relationships -->
+      <section class="card">
+        <h2>Schema &amp; key relationships</h2>
+        <p>
+          I started from a short narrative describing how DataWorks Inc.
+          organizes departments, employees, and client projects. From there
+          I designed a normalized schema that can scale as the firm grows.
+        </p>
+        <ul>
+          <li>
+            <strong>EMPLOYEE</strong> – basic staff information (name, role,
+            department).
+          </li>
+          <li>
+            <strong>DEPARTMENT</strong> – analytics, security, technology, HR,
+            etc., each with a location.
+          </li>
+          <li>
+            <strong>PROJECT</strong> – client projects with descriptions and
+            budgets.
+          </li>
+          <li>
+            <strong>EMPLOYEE_PROJECT</strong> – bridge table capturing the
+            many-to-many relationship between employees and projects, including
+            <em>hours</em>, <em>start_date</em>, and a <em>leader</em> flag.
+          </li>
+        </ul>
+        <p>
+          Primary and foreign keys enforce referential integrity, and the bridge
+          table makes it easy to calculate totals by employee, project, or
+          department without duplicating data.
+        </p>
+      </section>
+
+      <!-- Queries & analytics -->
+      <section class="card">
+        <h2>Queries &amp; analytics</h2>
+        <p>
+          Once the schema and sample data were in place, I focused on queries
+          that mirror what a manager or consultant would actually want to see.
+        </p>
+        <ul>
+          <li>
+            <strong>Employee workload by project</strong> – joins EMPLOYEE,
+            PROJECT, and EMPLOYEE_PROJECT to show which people are assigned
+            where, their hours, and whether they are project leaders.
+          </li>
+          <li>
+            <strong>Project budgets with assigned teams</strong> – lists each
+            project, its budget, and the employees assigned to it, ordered by
+            budget so leadership can see high-value work first.
+          </li>
+          <li>
+            <strong>Total hours per project</strong> – aggregates the bridge
+            table to summarize hours by project and rank initiatives by total
+            effort.
+          </li>
+          <li>
+            <strong>Department-level view</strong> – shows which departments
+            contribute to which projects, combining both budget and effort.
+          </li>
+        </ul>
+        <p>
+          These queries are written with clear aliases and comments so that
+          someone else at DataWorks Inc. could reuse and adapt them for ad-hoc
+          reporting or dashboards.
+        </p>
+      </section>
+
+     <!-- SCREENSHOTS -->
+    <section class="card">
+        <h2>Screenshots from Implementation</h2>
+  
+        <div class="screenshot-box">
+          <img
+            src="../images/dataworks-department.png"
+            alt="Employees & Departments Query"
+          />
+  
+          <img
+            src="../images/dataworks-descriptions.png"
+            alt="Employee Project Descriptions"
+          />
+  
+          <img
+            src="../images/dataworks-emp-project.png"
+            alt="Employee Project Relationship Table"
+          />
+  
+          <img
+            src="../images/dataworks-project-budget.png"
+            alt="Project Budgets Query"
+          />
+  
+          <img
+            src="../images/dataworks-total-hours.png"
+            alt="Total Hours by Project Query"
+          />
+  
+          <p>
+            SQL query results from PostgreSQL (via DBeaver) showing employee
+            participation in projects, departmental assignments, project
+            budgets, and total hours aggregated by project.
+          </p>
+        </div>
+      </section>
+
+      <!-- Impact -->
+      <section class="card">
+        <h2>Impact &amp; what I learned</h2>
+        <p>
+          DataWorks Inc. was a compact project, but it captured the full
+          lifecycle of a real database engagement: reading a business scenario,
+          modeling entities and relationships, writing SQL scripts, loading
+          data, and then answering concrete questions with queries.
+        </p>
+        <ul>
+          <li>
+            Practiced turning a many-to-many narrative into a clean, normalized
+            schema with a bridge table and clear constraints.
+          </li>
+          <li>
+            Strengthened my ability to write multi-table joins that remain
+            readable and reusable for others.
+          </li>
+          <li>
+            Saw how even a small dataset can already support useful analytics
+            such as workload distribution and project prioritization.
+          </li>
+        </ul>
+        <p style="margin-top:0.4rem;">
+          This mini-project connects directly to my larger work on
+          <strong>Sunrise General Hospital</strong> — both show how careful
+          data modeling and SQL can turn messy narratives into reliable,
+          analytics-ready structures.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> · Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
