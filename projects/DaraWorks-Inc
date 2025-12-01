@@ -307,22 +307,40 @@
         </p>
       </section>
 
-      <!-- Screenshots -->
-      <section class="card">
-        <h2>Screenshots &amp; visuals</h2>
-        <p class="mini-label">DBeaver views</p>
+     <!-- SCREENSHOTS -->
+    <section class="card">
+        <h2>Screenshots from Implementation</h2>
+  
         <div class="screenshot-box">
-          <!-- ЗАМЕНИ пути на свои файлы-скриншоты -->
-          
-          <img src="dataworks" alt="Employees and projects query in DBeaver" />
-          <img src="../images/dataworks-project-budget.png" alt="Projects with budgets" />
-          <img src="../images/dataworks-total-hours.png" alt="Total hours by project" />
-          <img src="../images/dataworks-employee-hours.png" alt="Employee hours and leaders" />
-          
+          <img
+            src="../images/dataworks-department.png"
+            alt="Employees & Departments Query"
+          />
+  
+          <img
+            src="../images/dataworks-descriptions.png"
+            alt="Employee Project Descriptions"
+          />
+  
+          <img
+            src="../images/dataworks-emp-project.png"
+            alt="Employee Project Relationship Table"
+          />
+  
+          <img
+            src="../images/dataworks-project-budget.png"
+            alt="Project Budgets Query"
+          />
+  
+          <img
+            src="../images/dataworks-total-hours.png"
+            alt="Total Hours by Project Query"
+          />
+  
           <p>
-            Here I plan to include screenshots from DBeaver: queries showing
-            employee–project assignments, project budgets, and total hours
-            by project and by employee.
+            SQL query results from PostgreSQL (via DBeaver) showing employee
+            participation in projects, departmental assignments, project
+            budgets, and total hours aggregated by project.
           </p>
         </div>
       </section>
