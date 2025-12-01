@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dron Teq – Canada Expansion Change Request | Ayana Bojokoeva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Change request proposal for enhancing the Dron Teq drone system to support Canadian operations: new requirements, use cases, and architecture."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-main: #01201b;
+      --bg-surface: #fdfdfb;
+      --accent: #10b981;
+      --accent-dark: #047857;
+      --text-main: #020617;
+      --text-muted: #6b7280;
+      --border: rgba(16, 185, 129, 0.35);
+      --radius-xl: 1.5rem;
+      --shadow-strong: 0 20px 50px rgba(6, 95, 70, 0.55);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #064e3b, #01201b 45%, #000814);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.7rem 3.5rem;
+    }
+
+    header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .back-link a {
+      color: #a7f3d0;
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: #ecfdf5;
+    }
+
+    .title-block p {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-top: 0.2rem;
+      max-width: 34rem;
+    }
+
+    .tag-row {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.7);
+      background: linear-gradient(135deg, #064e3b, #10b981);
+      color: #ecfdf5;
+    }
+
+    .card {
+      background: rgba(253, 253, 251, 0.98);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem 1.5rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-dark);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    p { margin-bottom: 0.4rem; }
+    ul { padding-left: 1.1rem; margin-top: 0.3rem; }
+    li { margin-bottom: 0.2rem; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item span {
+      display: block;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .mini-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .screenshot-box {
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(4, 120, 87, 0.6);
+      background: #f9fafb;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+
+    .screenshot-box img {
+      border-radius: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+
+    .resource-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-list a {
+      color: var(--accent-dark);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 780px) {
+      .shell { padding-inline: 1rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+      .title-block h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+        <p class="back-link">
+          ← <a href="../index.html">Back to portfolio</a>
+        </p>
+        <h1>Dron Teq – Canada Expansion Change Request</h1>
+        <p>
+          Change request proposal for adapting the Dron Teq drone services
+          platform from U.S.-only operations to a fully supported Canadian
+          market, including new requirements, use cases, and architecture.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Systems analysis</span>
+          <span class="tag">Canada expansion</span>
+          <span class="tag">Requirements & use cases</span>
+          <span class="tag">Architecture & testing</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; text-align:right; color:#e5e7eb;">
+          ISM 3113 – Systems Analysis<br />
+          University of South Florida · Prof. Mack Cooley
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Context & goal</h2>
+        <div class="two-col">
+          <div>
+            <p>
+              Dron Teq provides drone flight services and data analysis and
+              originally operated only within the United States. As the business
+              expands into Canada, the existing system must be adapted for new
+              regulations, payment methods, geography, and bilingual
+              communication.
+            </p>
+            <p>
+              Our goal in this project was to craft a formal
+              <strong>change request</strong> that extends the current
+              architecture for Canadian operations: defining updated operational
+              and security requirements, new and modified use cases, and a
+              design and implementation strategy that keeps the system coherent
+              instead of building a separate product. 
+            </p>
+          </div>
+          <div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span>Role</span>
+                Team lead and co-author of the change request
+              </div>
+              <div class="meta-item">
+                <span>Setting</span>
+                Group project · planning, analysis, design & implementation phases
+              </div>
+              <div class="meta-item">
+                <span>Focus</span>
+                Cross-border requirements, bilingual UX, taxes, compliance
+              </div>
+              <div class="meta-item">
+                <span>Tools & tech</span>
+                Requirements tables · use case modeling · architecture diagrams
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Updated requirements</h2>
+        <p>
+          We began by extending the existing Dron Teq requirements catalog to
+          cover Canadian operations rather than rewriting it from scratch.
+        </p>
+        <ul>
+          <li>
+            Expanded <strong>operational & performance requirements</strong>,
+            including web/mobile access, cloud storage via Amazon S3, and
+            support for at least 100 simultaneous users and 50 concurrent video
+            streams with response times under 7 seconds. :contentReference[oaicite:1]{index=1}
+          </li>
+          <li>
+            Strengthened <strong>security requirements</strong> with encrypted
+            payment flows, secure upload/download of drone videos and analyses,
+            and explicit access control for high-value client data.
+          </li>
+          <li>
+            Added <strong>cultural & political requirements</strong> for Canada:
+            French language support, Canadian address and postal formats,
+            currency conversion to CAD, GST/HST/PST handling, and local payment
+            methods such as Interac. :contentReference[oaicite:2]{index=2}
+          </li>
+          <li>
+            Introduced legal constraints like PIPEDA-compliant data storage and
+            region-aware handling of flight data in S3 buckets.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Use cases & process logic</h2>
+        <p>
+          My main contribution in the analysis phase was updating core use
+          cases so that they work consistently across both U.S. and Canadian
+          operations.
+        </p>
+        <ul>
+          <li>
+            <strong>Notify pilots of new flight request (U.S. & Canada)</strong> –
+            extended the logic to detect country from coordinates, build a list
+            of nearby pilots, apply Canadian tax rules, and send bilingual
+            notifications that show province/territory and bidding window
+            countdowns. :contentReference[oaicite:3]{index=3}
+          </li>
+          <li>
+            <strong>Pilot submits bid (U.S. & Canada)</strong> – added currency
+            conversion to CAD, localization of language based on pilot
+            preference, and flags for tax adjustments on Canadian bids.
+          </li>
+          <li>
+            <strong>Select winning flight bid</strong> – updated the manager’s
+            workflow to handle CAD pricing, tax-inclusive bids, drone capability
+            checks, and bilingual notifications to selected and non-selected
+            pilots as well as clients. :contentReference[oaicite:4]{index=4}
+          </li>
+        </ul>
+        <p>
+          For each use case we captured preconditions, normal and exception
+          flows, and a summary inputs/outputs table so developers can see how
+          data moves between datastores and user interfaces.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Architecture, design & implementation plan</h2>
+        <p>
+          In the design and implementation phases I helped translate the
+          requirements into concrete changes to the architecture, UI, and
+          operational processes.
+        </p>
+        <ul>
+          <li>
+            Proposed <strong>architecture adjustments</strong> such as
+            integrating Environment Canada weather APIs and Canadian GIS data
+            for airspace maps, plus a regional selector that toggles between
+            U.S. and Canadian behavior. :contentReference[oaicite:5]{index=5}
+          </li>
+          <li>
+            Specified UI updates for bilingual language switching, CAD pricing,
+            dynamic tax display, and Canadian address formats.
+          </li>
+          <li>
+            Designed program changes for Transport Canada pilot certification
+            checks, Canadian bidding logic, Interac / Canadian bank payments,
+            and PIPEDA-compliant data storage separation.
+          </li>
+          <li>
+            Helped outline a <strong>testing strategy</strong> covering bilingual
+            UX tests, compliance/security audits, performance testing with
+            Canadian modules enabled, and regional simulations across
+            provinces/territories. :contentReference[oaicite:6]{index=6}
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Resources</h2>
+        <p class="mini-label">Deliverable</p>
+        <div class="screenshot-box">
+          <!-- Когда сделаешь скрин обложки/таблиц – добавь сюда -->
+          <!-- <img src="../images/dronteq-canada-cover.png" alt="Dron Teq Canada change request cover" /> -->
+          <p>
+          
+          </p>
+          <ul class="resource-list">
+            <li>
+              <a href="../docs/DronTeq_Canada_Change_Request.pdf" target="_blank">
+                Dron Teq – Enhancing System Capability for Canadian Operations (PDF)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Impact & what I learned</h2>
+        <p>
+          This project showed me what it looks like to scale a real system from
+          one country to another while staying honest about regulations,
+          language, and payment realities.
+        </p>
+        <ul>
+          <li>
+            Practiced thinking in terms of <strong>change requests</strong>:
+            modifying an existing system responsibly instead of designing in a
+            vacuum.
+          </li>
+          <li>
+            Strengthened my ability to connect geospatial data, regulations,
+            language, and payments into one coherent set of requirements and
+            use cases.
+          </li>
+          <li>
+            Gained experience leading a team through multiple phases
+            (planning → analysis → design → implementation & testing) and
+            keeping the documentation consistent from section to section.
+          </li>
+        </ul>
+        <p style="margin-top:0.4rem;">
+          Dron Teq reinforced how much I enjoy cross-border systems problems:
+          where technology, regulation, and user experience all have to align in
+          a single design.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> · Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

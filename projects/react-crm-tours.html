@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Image Recognition – Teachable Machine Demo | Ayana Bojokoeva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="AI image recognition demo built with Teachable Machine, classifying everyday objects using a custom-trained computer vision model."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-main: #01201b;
+      --bg-surface: #fdfdfb;
+      --accent: #10b981;
+      --accent-dark: #047857;
+      --text-main: #020617;
+      --text-muted: #6b7280;
+      --border: rgba(16, 185, 129, 0.35);
+      --radius-xl: 1.5rem;
+      --shadow-strong: 0 20px 50px rgba(6, 95, 70, 0.55);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #064e3b, #01201b 45%, #000814);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.7rem 3.5rem;
+    }
+
+    header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .back-link a {
+      color: #a7f3d0;
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: #ecfdf5;
+    }
+
+    .title-block p {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-top: 0.2rem;
+      max-width: 36rem;
+    }
+
+    .tag-row {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.7);
+      background: linear-gradient(135deg, #064e3b, #10b981);
+      color: #ecfdf5;
+    }
+
+    .card {
+      background: rgba(253, 253, 251, 0.98);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem 1.5rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-dark);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    p { margin-bottom: 0.4rem; }
+    ul { padding-left: 1.1rem; margin-top: 0.3rem; }
+    li { margin-bottom: 0.2rem; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item span {
+      display: block;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .mini-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    .gallery-item {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      background: #f9fafb;
+      overflow: hidden;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      padding: 0.5rem 0.6rem 0.6rem;
+    }
+
+    /* замазываем лицо, если вдруг картинка без блюра */
+    .img-blur {
+      filter: blur(7px);
+      transform: scale(1.02);
+      transform-origin: center;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+    .resource-list li { margin-bottom: 0.25rem; }
+    .resource-list a {
+      color: var(--accent-dark);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 780px) {
+      .shell { padding-inline: 1rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+      .title-block h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+        <p class="back-link">
+          ← <a href="../index.html">Back to portfolio</a>
+        </p>
+        <h1>AI Image Recognition – Teachable Machine Demo</h1>
+        <p>
+          A browser-based AI demo that uses Teachable Machine and TensorFlow.js
+          to recognize everyday objects (phone, headphones, person) from the webcam
+          and display class probabilities in real time.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Computer vision</span>
+          <span class="tag">Teachable Machine</span>
+          <span class="tag">TensorFlow.js</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; text-align:right; color:#e5e7eb;">
+          ISM 3232 – App Development<br />
+          University of South Florida · Front-end AI demo
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Context & goal</h2>
+        <div class="two-col">
+          <div>
+            <p>
+              This project started as an experiment in making machine learning
+              feel tangible and personal. Instead of working with abstract datasets,
+              I trained a Teachable Machine model on objects from my own environment:
+              my iPhone, JBL headphones, and myself on camera.
+            </p>
+            <p>
+              The goal was to build a small but complete
+              <strong>end-to-end AI image recognition demo</strong>:
+              train a custom classifier, connect it to a web interface with
+              TensorFlow.js, and visualize predictions in a way that is clear for
+              non-technical users.
+            </p>
+          </div>
+          <div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span>Role</span>
+                End-to-end developer (data, model, UI)
+              </div>
+              <div class="meta-item">
+                <span>Setting</span>
+                Individual project · JavaScript & Teachable Machine
+              </div>
+              <div class="meta-item">
+                <span>Focus</span>
+                Image classification, model integration, UX for AI
+              </div>
+              <div class="meta-item">
+                <span>Tools & tech</span>
+                Teachable Machine · TensorFlow.js · HTML/CSS/JS
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>How it works</h2>
+        <p>
+          The system uses a Teachable Machine image model exported to
+          TensorFlow.js and loaded directly in the browser. The user enables the
+          webcam, shows an object (phone, person, headphones), and the app
+          continuously classifies frames and updates the UI.
+        </p>
+        <ul>
+          <li>
+            Collected and labeled images for three classes:
+            <strong>iPhone, Ayanka (me), JBL headphones</strong>.
+          </li>
+          <li>
+            Trained a Teachable Machine image classifier and exported the
+            model files for web deployment.
+          </li>
+          <li>
+            Wrote vanilla JavaScript to load the model, attach it to the webcam
+            stream, and call <code>predict()</code> on each frame.
+          </li>
+          <li>
+            Displayed the top prediction and confidence scores so users can see
+            how sure the model is and when it gets confused.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>UI & interaction</h2>
+        <p>
+          I kept the demo simple so that the focus stays on the AI behavior
+          rather than on heavy UI. The app has a clear “start” interaction and
+          a live prediction area that updates as you move objects in front of
+          the camera.
+        </p>
+        <ul>
+          <li>
+            Clean layout with a live video feed, prediction label, and a list of
+            class probabilities.
+          </li>
+          <li>
+            Labels match the real-world objects on my desk, which makes the
+            demo easy to understand for students or non-technical users.
+          </li>
+          <li>
+            Code is small and readable, making this project a good teaching
+            example for how to integrate pre-trained Teachable Machine models.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Screenshots & gallery</h2>
+        <p class="mini-label">Demo gallery</p>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="../images/teachable-iphone.png" alt="AI model recognizing iPhone" />
+            <div class="gallery-caption">
+              Model being tested on my iPhone as one of the trained classes.
+            </div>
+          </div>
+          <div class="gallery-item">
+            <!-- картинка с лицом заранее сделай blurred, а класс оставляем как дополнительную защиту -->
+            <img
+              src="../images/teachable-ayanka-blurred.jpg"
+              alt="Ayanka in front of the camera for model training"
+              class="gallery-caption"
+            />
+            <div class="gallery-caption">
+              Training and testing the “Ayanka (ME)” class — photo intentionally blurred.
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="../images/teachable-headphones.png" alt="JBL headphones used as training object" />
+            <div class="gallery-caption">
+              JBL headphones as another class for the image recognition model.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Code & repository</h2>
+        <p>
+          The full source code is available on GitHub, including HTML/JS,
+          model loading logic, and references to the exported Teachable Machine
+          model files.
+        </p>
+        <ul class="resource-list">
+          <li>
+            <a
+              href="https://github.com/bojokoevva/teachable_machine_template-main"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub – Teachable Machine template & demo
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>What I learned</h2>
+        <p>
+          This project helped me connect <strong>machine learning concepts</strong>
+          with <strong>front-end development</strong>. I practiced thinking not
+          just about model accuracy, but also about how users understand AI
+          predictions and what makes a demo feel trustworthy and transparent.
+        </p>
+        <ul>
+          <li>
+            Learned how to go from a no-code ML tool (Teachable Machine) to a
+            production-like browser integration with JavaScript.
+          </li>
+          <li>
+            Understood the limitations of small custom models, especially how
+            lighting, background, and camera angle affect predictions.
+          </li>
+          <li>
+            Confirmed that I enjoy building <strong>interactive AI demos</strong>
+            that can be used in teaching, workshops, or future research projects.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> · Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

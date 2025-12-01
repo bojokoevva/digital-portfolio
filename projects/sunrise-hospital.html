@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sunrise General Hospital Data Platform | Ayana Bojokoeva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Designing a relational data platform for Sunrise General Hospital, from narrative to PostgreSQL schema and analytics-ready views."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-main: #01201b;           /* глубокий тёмно-зелёный фон */
+      --bg-surface: #fdfdfb;        /* мягкий почти-белый */
+      --accent: #10b981;            /* изумрудный */
+      --accent-dark: #047857;       /* глубокий зелёный */
+      --text-main: #020617;         /* почти чёрный */
+      --text-muted: #6b7280;
+      --border: rgba(16, 185, 129, 0.35);
+      --radius-xl: 1.5rem;
+      --shadow-strong: 0 20px 50px rgba(6, 95, 70, 0.55);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #064e3b, #01201b 45%, #000814);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.7rem 3.5rem;
+    }
+
+    header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .back-link a {
+      color: #a7f3d0;
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: #ecfdf5;
+    }
+
+    .title-block p {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-top: 0.2rem;
+      max-width: 32rem;
+    }
+
+    .tag-row {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.7);
+      background: linear-gradient(135deg, #064e3b, #10b981);
+      color: #ecfdf5;
+    }
+
+    .card {
+      background: rgba(253, 253, 251, 0.98);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem 1.5rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-dark);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    p {
+      margin-bottom: 0.4rem;
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      margin-top: 0.3rem;
+    }
+
+    li {
+      margin-bottom: 0.2rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item span {
+      display: block;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .screenshot-box {
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(4, 120, 87, 0.6);
+      background: #f9fafb;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+
+    .screenshot-box img {
+      border-radius: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .mini-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+
+    .resource-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-list a {
+      color: var(--accent-dark);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 780px) {
+      .shell {
+        padding-inline: 1.1rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .title-block h1 {
+        font-size: 1.45rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+        <p class="back-link">
+          ← <a href="../index.html">Back to portfolio</a>
+        </p>
+        <h1>Sunrise General Hospital Data Platform</h1>
+        <p>
+          Designing a relational database and analytics layer for a fictional
+          hospital, starting from a narrative case and ending with a PostgreSQL
+          implementation ready for dashboards.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Healthcare</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">ERD &amp; 3NF</span>
+          <span class="tag">Analytics</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; text-align:right; color:#e5e7eb;">
+          ISM 4212 – Database Design &amp; Administration<br />
+          University of South Florida · Prof. Nasir Uddin
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Context &amp; goal</h2>
+        <div class="two-col">
+          <div>
+            <p>
+              Sunrise General Hospital is a detailed narrative case describing
+              admissions, physicians, departments, appointments, diagnoses, and
+              billing. The original description is written in business language,
+              with overlapping rules and many implicit assumptions about how the
+              hospital actually works.
+            </p>
+            <p>
+              My goal in this project was to turn that narrative into a clean,
+              relational <strong>data platform</strong>: a normalized PostgreSQL
+              schema with constraints, realistic sample data, and views that are
+              ready to support operational and analytical reporting through BI
+              tools.
+            </p>
+          </div>
+          <div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span>Role</span>
+                Data modeler, database designer, and implementer
+              </div>
+              <div class="meta-item">
+                <span>Setting</span>
+                Individual course project (capstone-style)
+              </div>
+              <div class="meta-item">
+                <span>Focus</span>
+                Schema design, constraints, seed data, analytics-ready views
+              </div>
+              <div class="meta-item">
+                <span>Tools &amp; tech</span>
+                PostgreSQL · DBeaver · ERDPlus · SQL · Tableau (planned)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Technical design</h2>
+        <p>
+          I began by extracting all entities, attributes, and business rules from
+          the narrative, then designed an entity–relationship diagram and
+          converted it into a <strong>3NF relational schema</strong> with clear
+          primary and foreign keys, plus business-driven constraints.
+        </p>
+        <ul>
+          <li>
+            Modeled core entities such as <em>Department, Doctor, Patient,
+            InsurancePlan, Appointment, Diagnosis, Appointment_Diagnosis,</em>
+            and <em>Billing</em>, with relationships that reflect real hospital
+            workflows.
+          </li>
+          <li>
+            Applied 3NF to separate patient demographics, encounters, diagnoses,
+            and billing into distinct tables, reducing redundancy and improving
+            consistency.
+          </li>
+          <li>
+            Defined a composite primary key in <code>Appointment_Diagnosis</code>
+            so that each appointment can safely carry multiple diagnoses without
+            duplicates.
+          </li>
+          <li>
+            Implemented integrity constraints such as valid appointment statuses
+            and allowed values for patient sex, and enforced non-negative
+            billing amounts.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Key logic &amp; analytics</h2>
+        <p>
+          Once the schema was implemented in PostgreSQL, I focused on queries
+          and sanity checks that prove the model behaves correctly and can
+          support analytics on top of it.
+        </p>
+        <ul>
+          <li>
+            Wrote sanity-check queries to count departments, doctors, patients,
+            insurance plans, diagnoses, appointments, billing rows, and
+            appointment–diagnosis pairs to validate referential integrity.
+          </li>
+          <li>
+            Built joins across <code>Appointment</code>, <code>Doctor</code>,
+            <code>Department</code>, <code>Patient</code>, and
+            <code>Appointment_Diagnosis</code> to verify that sample data
+            returns the expected visits and diagnoses.
+          </li>
+          <li>
+            Designed query patterns that can be turned into dashboards:
+            admissions by department, diagnoses per physician, and completed
+            visits vs. scheduled/no-show appointments.
+          </li>
+          <li>
+            Ensured that each <code>Billing</code> row links to exactly one
+            completed appointment, enabling accurate revenue and payer analysis.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Screenshots &amp; resources</h2>
+        <p class="mini-label">Visual overview</p>
+        <div class="screenshot-box">
+          <!-- ERD screenshot (из твоего PNG) -->
+          <!-- Положи файл в /images и назови sunrise-erd.png -->
+          <img
+            src="../images/sunrise-erd.png"
+            alt="ERD for Sunrise General Hospital"
+          />
+
+          <p>
+            ERD for Sunrise General Hospital showing departments, doctors,
+            patients, insurance plans, appointments, diagnoses, billing, and the
+            Appointment_Diagnosis bridge.
+          </p>
+
+          <ul class="resource-list">
+            <!-- Положи pdf и sql файлы в соответствующие папки и при желании переименуй -->
+            <li>
+              <a href="../docs/sunrise-logical-schema.pdf" target="_blank">
+                Logical schema (PDF)
+              </a>
+              – table structures and keys.
+            </li>
+            <li>
+              <a href="../docs/sunrise-sanity-check.pdf" target="_blank">
+                Sanity check queries (PDF)
+              </a>
+              – row counts &amp; example joins.
+            </li>
+            <li>
+              <a href="../sql/sunrise_create_hospital.sql" target="_blank">
+                DDL script – create_hospital.sql
+              </a>
+            </li>
+            <li>
+              <a href="../sql/sunrise_seed_min.sql" target="_blank">
+                Seed script – seed_min.sql
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Impact &amp; what I learned</h2>
+        <p>
+          Even as a fictional case, Sunrise General Hospital feels close to real
+          healthcare data challenges. Every sentence in the narrative had to be
+          translated into a rule, relationship, or constraint in the schema.
+        </p>
+        <ul>
+          <li>
+            Strengthened my ability to turn long, messy narratives into a clean,
+            normalized schema without losing important business rules.
+          </li>
+          <li>
+            Practiced designing databases that support both transaction-level
+            operations and analytics, instead of choosing one or the other.
+          </li>
+          <li>
+            Gained confidence in using PostgreSQL for constraint design, seed
+            data, and sanity-check queries that catch mistakes early.
+          </li>
+        </ul>
+        <p style="margin-top:0.4rem;">
+          This project fits directly into my interest in
+          <strong>healthcare data</strong> and in building trustworthy systems
+          for high-stakes decision making around patients, staffing, and
+          resources.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> · Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+

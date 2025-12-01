@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ayana Bojokoeva | Data, Analytics & Cybersecurity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portfolio of Ayana Bojokoeva – BAIS (Cybersecurity) student at USF, focusing on data, analytics, and secure systems."
+  />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-main: #f3f4f6;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f9fafb;
+      --accent: #047857;
+      --accent-soft: #bbf7d0;
+      --accent-dark: #064e3b;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow-soft: 0 18px 40px rgba(15, 118, 110, 0.12);
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --transition: 0.25s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---------- LAYOUT ---------- */
+
+    .page-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to bottom,
+        rgba(243, 244, 246, 0.97),
+        rgba(243, 244, 246, 0.8),
+        transparent
+      );
+      margin-bottom: 1.25rem;
+    }
+
+    .nav-bar {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar-shell {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #a7f3d0, #047857);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 2px solid rgba(209, 250, 229, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #ecfdf5;
+      background: rgba(6, 78, 59, 0.9);
+    }
+
+    .avatar-detail {
+      position: absolute;
+      bottom: -4px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 2px solid rgba(209, 250, 229, 0.9);
+      background: rgba(15, 23, 42, 0.78);
+      transform: rotate(-12deg);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text strong {
+      font-size: 0.95rem;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .nav-link {
+      border-radius: 999px;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      border-color: rgba(4, 120, 87, 0.3);
+      background: #ecfdf5;
+      color: var(--accent-dark);
+    }
+
+    .nav-link.primary {
+      background: var(--accent-dark);
+      color: #ecfdf5;
+      border-color: transparent;
+      box-shadow: 0 12px 30px rgba(4, 120, 87, 0.4);
+    }
+
+    .nav-link.primary:hover {
+      background: #022c22;
+      transform: translateY(-1px);
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: stretch;
+      margin-bottom: 2rem;
+    }
+
+    .hero-main {
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: 1.8rem 1.7rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title span.highlight {
+      color: var(--accent-dark);
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-subtitle strong {
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    .hero-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-pill {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(4, 120, 87, 0.4);
+      background: #ecfdf5;
+      color: var(--accent-dark);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.88rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      background: transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent-dark);
+      border-color: transparent;
+      color: #ecfdf5;
+      box-shadow: 0 14px 35px rgba(4, 120, 87, 0.6);
+    }
+
+    .btn-primary:hover {
+      background: #022c22;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--accent-dark);
+      background: #f9fafb;
+    }
+
+    .btn-ghost:hover {
+      background: #ecfdf5;
+      border-color: rgba(4, 120, 87, 0.45);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .hero-card-title span.badge {
+      font-size: 0.72rem;
+      padding: 0.12rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(4, 120, 87, 0.35);
+      background: #ecfdf5;
+      color: var(--accent-dark);
+    }
+
+    .hero-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .avatar-panel {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .avatar-large {
+      width: 96px;
+      height: 96px;
+      border-radius: 1.4rem;
+      background:
+        radial-gradient(circle at 20% 15%, #bbf7d0, transparent 55%),
+        radial-gradient(circle at 80% 90%, #22c55e, transparent 60%),
+        linear-gradient(135deg, #022c22, #064e3b);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(16, 185, 129, 0.6);
+    }
+
+    .avatar-face {
+      position: absolute;
+      inset: 16px 16px 14px 16px;
+      border-radius: 1rem;
+      background:
+        linear-gradient(180deg, rgba(249, 250, 251, 0.96), rgba(229, 231, 235, 0.96));
+      clip-path: polygon(
+        15% 10%,
+        85% 10%,
+        95% 35%,
+        85% 90%,
+        15% 90%,
+        5% 35%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
+    .avatar-accent {
+      position: absolute;
+      bottom: -12px;
+      right: -16px;
+      width: 54px;
+      height: 54px;
+      border-radius: 1rem;
+      border: 2px solid rgba(187, 247, 208, 0.95);
+      background: #111827;
+      opacity: 0.9;
+      transform: rotate(-18deg);
+    }
+
+    /* ---------- SECTION GENERIC ---------- */
+
+    section {
+      margin-bottom: 2.4rem;
+    }
+
+    .section-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.5rem 1.7rem 1.6rem;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-header {
+      margin-bottom: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.65rem;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      border-radius: 999px;
+      padding: 0.08rem 0.5rem;
+      background: #ecfdf5;
+      border: 1px solid rgba(4, 120, 87, 0.4);
+      color: var(--accent-dark);
+    }
+
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      max-width: 26rem;
+    }
+
+    /* ---------- ABOUT ---------- */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      font-size: 0.86rem;
+    }
+
+    .about-grid p {
+      margin-bottom: 0.6rem;
+    }
+
+    .about-grid p span.emph {
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
+    .about-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .meta-item {
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: var(--bg-subtle);
+      padding: 0.6rem 0.75rem;
+      font-size: 0.78rem;
+    }
+
+    .meta-label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline {
+      border-left: 2px solid rgba(4, 120, 87, 0.25);
+      padding-left: 1rem;
+      margin-top: 0.4rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 0.6rem;
+      position: relative;
+      padding-left: 0.4rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.05rem;
+      top: 0.25rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+    }
+
+    .timeline-item span.year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-right: 0.3rem;
+    }
+
+    /* ---------- SKILLS ---------- */
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+    }
+
+    .skills-group-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-row {
+      margin-bottom: 0.55rem;
+    }
+
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.8rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .skill-level {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-dark);
+    }
+
+    .skill-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #047857);
+      width: 0;
+      transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .skills-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .skills-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .skills-chip {
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* ---------- PROJECTS ---------- */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      font-size: 0.86rem;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .project-card {
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      background: var(--bg-subtle);
+      padding: 0.75rem 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .project-card:hover {
+      background: #ecfdf5;
+      border-color: rgba(4, 120, 87, 0.45);
+      box-shadow: 0 10px 26px rgba(15, 118, 110, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .project-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .project-label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      padding: 0.08rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(4, 120, 87, 0.45);
+      background: #ecfdf5;
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    .project-meta-line {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .project-tech {
+      font-size: 0.75rem;
+      color: var(--accent-dark);
+    }
+
+    .project-arrow {
+      position: absolute;
+      right: 0.75rem;
+      bottom: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--accent-dark);
+    }
+
+    .project-highlight {
+      border-radius: 1rem;
+      border: 1px dashed rgba(4, 120, 87, 0.5);
+      padding: 0.85rem 0.95rem;
+      background: #f9fafb;
+      font-size: 0.8rem;
+    }
+
+    .project-highlight strong {
+      color: var(--accent-dark);
+    }
+
+    /* ---------- EXPERIENCE & AWARDS ---------- */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.3rem;
+      font-size: 0.84rem;
+    }
+
+    .exp-item {
+      margin-bottom: 0.7rem;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: baseline;
+      font-size: 0.82rem;
+    }
+
+    .exp-role {
+      font-weight: 600;
+    }
+
+    .exp-org {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .exp-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .exp-item ul {
+      margin-top: 0.25rem;
+      padding-left: 1rem;
+      list-style: disc;
+    }
+
+    .exp-item li {
+      margin-bottom: 0.15rem;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .badge {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    /* ---------- CONTACT ---------- */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      font-size: 0.84rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-item span.label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .contact-item a {
+      font-weight: 500;
+      color: var(--accent-dark);
+      word-break: break-all;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+
+    .animate {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .skills-layout,
+      .projects-grid,
+      .about-grid,
+      .two-col,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        padding-inline: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section-card {
+        padding-inline: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- HEADER -->
+    <header>
+      <nav class="nav-bar">
+        <div class="brand">
+          <div class="avatar-shell" aria-hidden="true">
+            <div class="avatar-circle">AB</div>
+            <div class="avatar-detail"></div>
+          </div>
+          <div class="brand-text">
+            <strong>Ayana Bojokoeva</strong>
+            <span>Data · Analytics · Cybersecurity</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <button class="nav-link" data-target="#about">About</button>
+          <button class="nav-link" data-target="#skills">Skills</button>
+          <button class="nav-link" data-target="#projects">Projects</button>
+          <button class="nav-link" data-target="#experience">Experience</button>
+          <button class="nav-link primary" data-target="#contact">Contact</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main animate">
+        <div class="hero-kicker">BAIS · Cybersecurity · University of South Florida</div>
+        <h1 class="hero-title">
+          Building <span class="highlight">data-driven</span> and
+          <span class="highlight">secure</span> systems for real organizations.
+        </h1>
+        <p class="hero-subtitle">
+          I’m <strong>Ayana Bojokoeva</strong>, a Business Analytics & Information Systems
+          student with a Cybersecurity concentration. I design relational databases,
+          analytical dashboards, and secure infrastructures that connect
+          <strong>clean data</strong> to <strong>clear decisions</strong>.
+        </p>
+        <div class="hero-stats-row">
+          <span class="hero-pill">GPA: 3.75 · Dean’s List</span>
+          <span class="hero-pill">Healthcare · Finance · Web Systems</span>
+          <span class="hero-pill">First-gen international student</span>
+        </div>
+        <div class="hero-actions">
+          <!-- TODO: заменить на своё PDF резюме -->
+          <a href="CV_AyanaBojokoeva.pdf" class="btn btn-primary" target="_blank">
+            View resume (PDF)
+          </a>
+          <button class="btn btn-ghost" data-target="#projects">
+            View selected projects
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-card animate">
+          <div class="hero-card-title">
+            Academic & personal story
+            <span class="badge">First-gen · International</span>
+          </div>
+          <div class="avatar-panel">
+            <div class="avatar-large" aria-hidden="true">
+              <div class="avatar-face">AB</div>
+              <div class="avatar-accent"></div>
+            </div>
+            <div>
+              <p>
+                I grew up far from Tampa, spending my school years
+                dreaming about studying in the United States. At 18,
+                I moved alone to the U.S. and became the first person in my
+                family to attend an American university.
+              </p>
+              <p>
+                This experience shaped how I approach work: I’m used to
+                new systems, new countries, and figuring things out from
+                scratch — whether that’s a cloud database, a hospital case,
+                or a network design problem.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card animate">
+          <div class="hero-card-title">
+            Snapshot
+            <span class="badge">Work & projects</span>
+          </div>
+          <p>
+            My coursework and projects sit at the intersection of
+            <strong>data, security, and operations</strong>: designing
+            PostgreSQL databases for hospitals, analyzing requirements for
+            software systems, configuring network architectures, and building
+            React interfaces that surface the right information to users.
+          </p>
+          <p style="margin-top:0.4rem;">
+            This portfolio collects some of these projects in one place so that
+            anyone—professors, peers, or professionals—can see how I think
+            through technical and analytical problems.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-card animate">
+      <div class="section-header">
+        <div class="section-title">
+          About
+          <span class="section-tag">Who I am</span>
+        </div>
+        <p class="section-subtitle">
+          From a high school dream of studying abroad to building data & security
+          projects in Tampa — here’s how my path is evolving.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p>
+            I’m <span class="emph">Ayana</span>, an undergraduate at the
+            <span class="emph">University of South Florida</span> studying
+            <span class="emph">Business Analytics & Information Systems</span>
+            with a concentration in <span class="emph">Cybersecurity</span>.
+            I enjoy turning messy narratives — like hospital workflows or customer journeys —
+            into clean data models and systems that people can actually trust.
+          </p>
+          <p>
+            In high school I spent years imagining what it would be like to
+            study in the United States. At 18, I moved alone to the U.S. and
+            became the first person in my family to enroll at an American
+            university. That transition taught me resilience, independence,
+            and how to treat every new challenge as a system I can learn.
+          </p>
+          <p>
+            My academic and project work now sits at the intersection of
+            <span class="emph">data, security, and operations</span>: designing
+            PostgreSQL databases for hospitals, analyzing requirements for
+            software systems, configuring network architectures, and building
+            React-based tools that make complex information easier to use.
+          </p>
+
+          <div class="about-meta">
+            <div class="meta-item">
+              <span class="meta-label">Education</span>
+              B.S. BAIS (Cybersecurity), USF<br />
+              Expected graduation: May 2026
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Languages</span>
+              English (Fluent) · Russian (Native)<br />
+              Kyrgyz (Intermediate) · French (Intermediate)
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Interests</span>
+              Healthcare data · Financial systems · Secure infrastructure
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Focus</span>
+              Data modeling · Analytics · Cybersecurity
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="skills-group-title">Timeline</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="year">High school</span>
+              Dreaming about studying in the U.S. and exploring STEM and math.
+            </div>
+            <div class="timeline-item">
+              <span class="year">Age 18</span>
+              Move to the United States as the first in my family to attend an
+              American university.
+            </div>
+            <div class="timeline-item">
+              <span class="year">USF – BAIS</span>
+              Deepening skills in databases, analytics, systems analysis,
+              networking, and cybersecurity.
+            </div>
+            <div class="timeline-item">
+              <span class="year">Recent years</span>
+              Capstone-style projects in healthcare, network design, and
+              customer applications; growing experience across data and security.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section-card animate">
+      <div class="section-header">
+        <div class="section-title">
+          Skills
+          <span class="section-tag">Advanced toolbox</span>
+        </div>
+        <p class="section-subtitle">
+          An advanced-level skill set across data, software, and security,
+          focused on building systems that are both useful and trustworthy.
+        </p>
+      </div>
+
+      <div class="skills-layout">
+        <div>
+          <div class="skills-group-title">Data & Analytics</div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>SQL & PostgreSQL</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="92"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Data modeling & normalization</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="90"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Tableau & Power BI</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="85"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Python (analytics & scripts)</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="88"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="skills-group-title">Systems, Cyber & Front-end</div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Systems & business analysis</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="87"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Networking & basic security</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="83"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Wireshark & traffic analysis</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="80"></div>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>React & JavaScript</span>
+              <span class="skill-level">ADVANCED</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-level="82"></div>
+            </div>
+          </div>
+
+          <p class="skills-note">
+            I like combining these skills in end-to-end projects:
+            modeling a domain, implementing the database, analyzing the data,
+            and then exposing it through secure networks and interfaces.
+          </p>
+
+          <div class="skills-chips">
+            <span class="skills-chip">PostgreSQL · DBeaver</span>
+            <span class="skills-chip">ERDs · 3NF · constraints</span>
+            <span class="skills-chip">REST APIs</span>
+            <span class="skills-chip">Git & GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section-card animate">
+      <div class="section-header">
+        <div class="section-title">
+          Projects
+          <span class="section-tag">Clickable case studies</span>
+        </div>
+        <p class="section-subtitle">
+          Each card opens a separate page with a deeper explanation: context,
+          technical design, screenshots, and the impact of the work.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-list">
+          <!-- Sunrise Hospital -->
+          <a class="project-card" href="projects/sunrise-hospital.html">
+            <div class="project-label-row">
+              <h3>Sunrise General Hospital Data Platform</h3>
+              <span class="project-tag">Healthcare · PostgreSQL</span>
+            </div>
+            <p class="project-meta-line">
+              Capstone-style project for designing a hospital database and analytics layer.
+            </p>
+            <p class="project-tech">
+             SQL · ERD · 3NF schema · constraints · seed data · Tableau dashboards
+            </p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <!-- Goodmead Hospital -->
+          <a class="project-card" href="projects/goodmead-hospital.html">
+            <div class="project-label-row">
+              <h3>Goodmead Hospital – Business & Systems Analysis</h3>
+              <span class="project-tag">Requirements · Diagrams</span>
+            </div>
+            <p class="project-meta-line">
+              30+ page team report & executive presentation for a hospital management system.
+            </p>
+            <p class="project-tech">
+              Use cases · process diagrams · requirements · stakeholder views
+            </p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <!-- Dron Teq -->
+          <a class="project-card" href="projects/dron-teq-canada.html">
+            <div class="project-label-row">
+              <h3>Dron Teq System – Canada Expansion Analysis</h3>
+              <span class="project-tag">System design</span>
+            </div>
+            <p class="project-meta-line">
+              Extending an existing drone platform to support Canadian operations.
+            </p>
+            <p class="project-tech">
+              Requirements changes · ERDs · design decisions · regulatory constraints
+            </p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <!-- Network Design -->
+          <a class="project-card" href="projects/network-capstone.html">
+            <div class="project-label-row">
+              <h3>Enterprise Network Design Capstone</h3>
+              <span class="project-tag">Networking · Security</span>
+            </div>
+            <p class="project-meta-line">
+              End-to-end network architecture for a multi-site organization.
+            </p>
+            <p class="project-tech">
+              Topology · security controls · hardware & budget · documentation
+            </p>
+            <span class="project-arrow">→</span>
+          </a>
+
+          <a class="project-card" href="projects/react-data-ai-suite.html">
+            <div class="project-label-row">
+              <h3>React Dashboards & AI Demos – Front-End Suite</h3>
+              <span class="project-tag">React · JS · Data · AI</span>
+            </div>
+          
+            <p class="project-meta-line">
+              Interactive front-end apps combining UI components, data visualization,
+              and browser-based machine learning demos.
+            </p>
+          
+            <p class="project-tech">
+              State & props · Chart.js · Teachable Machine · TensorFlow.js · API logic
+            </p>
+          
+            <span class="project-arrow">→</span>
+          </a>
+        </div>
+    
+
+        <div class="project-highlight">
+          <p>
+            <strong>How I think about projects</strong><br />
+            Each project is a way for me to practice the full lifecycle:
+            understanding a narrative, modeling it, choosing constraints,
+            implementing and testing the system, and then communicating the
+            results in a way that non-technical people can follow.
+          </p>
+          <p style="margin-top:0.5rem;">
+            On the detail pages, I highlight both the <strong>technical design</strong>
+            (schemas, diagrams, queries, network decisions) and the
+            <strong>impact</strong> (what the organization gains, what risks are reduced,
+            and how data becomes easier to use).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE & AWARDS -->
+    <section id="experience" class="section-card animate">
+      <div class="section-header">
+        <div class="section-title">
+          Experience & Highlights
+          <span class="section-tag">Beyond coursework</span>
+        </div>
+        <p class="section-subtitle">
+          Selected roles and achievements that support my academic and project work.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <div class="exp-role">Math & analytics tutoring</div>
+                <div class="exp-org">University learning center / SMART-style tutoring</div>
+              </div>
+              <span class="exp-date">Ongoing</span>
+            </div>
+            <ul>
+              <li>Support students with quantitative courses and problem-solving strategies.</li>
+              <li>Explain concepts in multiple ways and adapt to different learning styles.</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <div class="exp-role">Data & security-focused internships</div>
+                <div class="exp-org">Organizations in Kyrgyzstan & international contexts</div>
+              </div>
+              <span class="exp-date">Past roles</span>
+            </div>
+            <ul>
+              <li>Worked with operational data and basic security practices in real organizations.</li>
+              <li>Helped connect day-to-day processes with structured data and reporting needs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="skills-group-title">Highlights & focus areas</div>
+          <div class="badge-list">
+            <span class="badge">Dean’s List</span>
+            <span class="badge">International student leadership</span>
+            <span class="badge">Healthcare & finance cases</span>
+            <span class="badge">Data & cyber integration</span>
+            <span class="badge">First-gen college student</span>
+          </div>
+          <p style="margin-top:0.6rem;">
+            I’m especially interested in work where I can combine
+            <strong>data modeling</strong>, <strong>analytics</strong>, and
+            <strong>security thinking</strong> — for example, designing reliable
+            data platforms in healthcare or secure analytical systems for finance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-card animate">
+      <div class="section-header">
+        <div class="section-title">
+          Contact
+          <span class="section-tag">Let’s connect</span>
+        </div>
+        <p class="section-subtitle">
+          Feel free to reach out about data, security, and real-world systems—or
+          just to start a conversation.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="label">Email</span>
+              <a href="mailto:bojokoeva34@gmail.com">bojokoeva34@gmail.com</a>
+            </li>
+            <li class="contact-item">
+              <span class="label">GitHub</span>
+              <a
+                href="https://github.com/bojokoevva"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/bojokoevva
+              </a>
+            </li>
+            <li class="contact-item">
+              <span class="label">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/ayana-bojokoeva-9b5430299/" target="_blank">
+                Ayana Bojokoeva
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p>
+            If you explore this portfolio and would like more detail on a specific
+            project, I’m happy to share additional documentation: SQL scripts,
+            ERDs, Tableau dashboards, or written reports.
+          </p>
+          <p style="margin-top:0.4rem;">
+            I care about both the technical depth of a solution and how clearly it
+            can be explained, so feedback on either side is always welcome.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> · Designed & coded by Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    // Smooth scroll for nav buttons
+    document.querySelectorAll("[data-target]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-target");
+        const el = document.querySelector(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    // Reveal animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".animate").forEach((el) => observer.observe(el));
+
+    // Skill bar animations
+    const skillsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const fill = entry.target;
+            const level = fill.dataset.level || 80;
+            fill.style.width = level + "%";
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    document.querySelectorAll(".skill-bar-fill").forEach((fill) => {
+      skillsObserver.observe(fill);
+    });
+
+    // Year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

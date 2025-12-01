@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Goodmead Hospital – Business & Systems Analysis | Ayana Bojokoeva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Business and systems analysis for Goodmead Hospital, including use cases, process diagrams, and a 30+ page team report."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-main: #01201b;
+      --bg-surface: #fdfdfb;
+      --accent: #10b981;
+      --accent-dark: #047857;
+      --text-main: #020617;
+      --text-muted: #6b7280;
+      --border: rgba(16, 185, 129, 0.35);
+      --radius-xl: 1.5rem;
+      --shadow-strong: 0 20px 50px rgba(6, 95, 70, 0.55);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #064e3b, #01201b 45%, #000814);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.7rem 3.5rem;
+    }
+
+    header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .back-link a {
+      color: #a7f3d0;
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: #ecfdf5;
+    }
+
+    .title-block p {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-top: 0.2rem;
+    }
+
+    .tag-row {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.7);
+      background: linear-gradient(135deg, #064e3b, #10b981);
+      color: #ecfdf5;
+    }
+
+    .card {
+      background: rgba(253, 253, 251, 0.98);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem 1.5rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-dark);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    p { margin-bottom: 0.4rem; }
+    ul { padding-left: 1.1rem; margin-top: 0.3rem; }
+    li { margin-bottom: 0.2rem; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item span {
+      display: block;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .screenshot-box {
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(4, 120, 87, 0.6);
+      background: #f9fafb;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+
+    .screenshot-box img {
+      border-radius: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .mini-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+
+    .resource-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-list a {
+      color: var(--accent-dark);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    footer {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 780px) {
+      .shell { padding-inline: 1rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+      .title-block h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+        <p class="back-link">
+          ← <a href="../index.html">Back to portfolio</a>
+        </p>
+        <h1>Goodmead Hospital – Business & Systems Analysis</h1>
+        <p>
+          A 30+ page team report and executive-level presentation for a
+          near real-life hospital case, focusing on processes, requirements,
+          and information flows.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Healthcare</span>
+          <span class="tag">Business analysis</span>
+          <span class="tag">Use cases & diagrams</span>
+          <span class="tag">Team project</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; text-align:right; color:#e5e7eb;">
+          ISM 4335 – Business Analysis<br />
+          University of South Florida · Prof. Bhuvan Unhelkar
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Context & goal</h2>
+        <div class="two-col">
+          <div>
+            <p>
+              Goodmead Hospital is a case about a complex hospital management
+              system with multiple departments, patient workflows, and
+              administrative processes. Our team acted as analysts brought in to
+              understand how the current system works and propose an improved
+              future-state design.
+            </p>
+            <p>
+              The goal was to apply structured
+              <strong>business and systems analysis</strong> techniques:
+              documenting current workflows, clarifying requirements, mapping
+              data flows, and communicating all of this in a professional report
+              and presentation that a steering committee could act on.
+            </p>
+          </div>
+          <div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span>Role</span>
+                Business analyst, modeler, and co-author
+              </div>
+              <div class="meta-item">
+                <span>Setting</span>
+                Team project · case-based hospital scenario
+              </div>
+              <div class="meta-item">
+                <span>Focus</span>
+                Requirements, use cases, process diagrams, data flows
+              </div>
+              <div class="meta-item">
+                <span>Tools & tech</span>
+                Use case diagrams · process modeling tools · office suite
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Technical design</h2>
+        <p>
+          Although this project did not require a full implementation, the
+          analysis was highly structured and technical in its own way. We
+          modeled how information should flow across departments and systems,
+          and how different actors (patients, nurses, physicians, admins) would
+          interact with the hospital management system.
+        </p>
+        <ul>
+          <li>
+            Documented current-state workflows for key processes such as
+            admissions, scheduling, and discharge management.
+          </li>
+          <li>
+            Wrote detailed use cases describing actors, triggers, preconditions,
+            main flows, and alternative flows for critical scenarios.
+          </li>
+          <li>
+            Created diagrams (use case diagrams, activity diagrams, and basic
+            data flow diagrams) to visualize interactions and information
+            movements.
+          </li>
+          <li>
+            Identified data elements and touchpoints that would later influence
+            database design and integration with other hospital systems.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Key logic & analytics</h2>
+        <p>
+          The “logic” of this project was about how the system behaves from a
+          business perspective: who does what, with which information, and in
+          which order. We used a requirements-driven approach to ensure that
+          every process and screen existed for a reason.
+        </p>
+        <ul>
+          <li>
+            Distinguished between functional requirements (“the system shall…”
+            statements) and non-functional requirements (usability, security,
+            performance).
+          </li>
+          <li>
+            Prioritized requirements according to business value and
+            implementation complexity, which helped us outline phases for
+            development.
+          </li>
+          <li>
+            Connected process gaps (for example, manual handoffs or duplicated
+            data entry) to specific system features that could reduce errors and
+            delays.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Visuals</h2>
+        <p class="mini-label">Visual overview</p>
+        <div class="screenshot-box">
+          <!--
+          <img src="../images/goodmead-use-cases.png" alt="Goodmead use case diagram" />
+          <img src="../images/goodmead-process.png" alt="Goodmead process diagram" />
+          <img src="../images/goodmead-slides.png" alt="Goodmead presentation slide" />
+          -->
+          
+
+          <ul class="resource-list">
+            <li>
+              <a href="../docs/Caretech.pdf" target="_blank">
+                CareTech – Goodmead Hospital Business Analysis (final PDF)
+              </a>
+            </li>
+            <li>
+              <a href="../docs/Caretech.docx.pdf" target="_blank">
+                CareTech – detailed draft version (PDF)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Impact & what I learned</h2>
+        <p>
+          Goodmead Hospital helped me practice the “before code” phase of
+          systems work: listening to the narrative, organizing it, and turning
+          it into structured models and requirements that a development team
+          could implement.
+        </p>
+        <ul>
+          <li>
+            Improved my ability to move between written narratives, diagrams,
+            and structured requirements without losing important details.
+          </li>
+          <li>
+            Learned how to collaborate in a team on a long report while keeping
+            the writing and notation consistent for a professional audience.
+          </li>
+          <li>
+            Strengthened my understanding of how business analysis, systems
+            analysis, and future database designs fit together in large
+            projects.
+          </li>
+        </ul>
+        <p style="margin-top:0.4rem;">
+          This project reinforced my interest in <strong>healthcare systems</strong>
+          and in bridging the gap between business language and technical
+          design so that real organizations can move from ideas to working
+          systems.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> · Ayana Bojokoeva
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
